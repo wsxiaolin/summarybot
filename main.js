@@ -68,7 +68,7 @@ async function main() {
 
   await Promise.all(promises);
 
-  await fs.writeFile("./indx.txt", messages[0].ID);
+  await fs.writeFile("./index.txt", messages[0].ID);
 }
 
 main();
