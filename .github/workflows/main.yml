@@ -24,3 +24,17 @@ jobs:
         PASSWORD: ${{ secrets.PASSWORD }}
         TOKEN: ${{ secrets.TOKEN }}
       run: node main.js
+
+    - name: Set up Git
+      run: |
+        git config --global user.name 'gushishang[bot]'
+        git config --global user.email 'xiegushi2022@outlook.com'
+        git add .
+        git commit -m "索引更新"
+          
+    - name: Pushing to production branch
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
+          
