@@ -35,6 +35,7 @@ async function fetchChatCompletion(text) {
       error.response ? error.response.data : error.message
     );
     fs.appendFile("./error.txt", JSON.stringify(error));
+    return (error.response ? error.response.data : error.message).slice(0,300)
   }
 }
 
