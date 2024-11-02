@@ -50,8 +50,9 @@ async function main() {
   async function getSummary(item) {
     if (index === item.ID) return;
     if (!item.Fields.Content.includes("@生成摘要")) return;
-    if (!item.Fields.Content.length > 8) return;
-    if (item.Users[0] === "66ff8e723c7548d804bc49cd") return;
+    if (item.Fields.Content.length > 8) return;
+    if (item.Users[0] === "669a4fc86b03afd70fa57bc2") return;
+
 
     let summary;
     if (item.Fields.DiscussionID) {
