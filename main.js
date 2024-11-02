@@ -5,7 +5,7 @@ const axios = require("axios");
 async function fetchChatCompletion(text) {
   const url = "https://spark-api-open.xf-yun.com/v1/chat/completions";
   const data = {
-    model: "generalv3.5",
+    model: "4.0Ultra",
     messages: [
       {
         role: "system",
