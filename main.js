@@ -25,16 +25,21 @@ async function fetchChatCompletion(text) {
 
   try {
     const response = await axios.post(url, data, { headers });
+    if (!response.data.choices[0].message.content) {
+      throw new Error();
+    }
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error(
       "Error:",
       error.response ? error.response.data : error.message
     );
+    fs.appendFile("./error.txt", JSON.stringify(error));
   }
 }
 
 async function main() {
+  await fs.appendFile("./log.txt", "\n" + new Date().toDateString());
   const user = new pl.User(process.env.USERNAME, process.env.PASSWORD);
   await user.user.login();
   const messages = (await user.notification.get(3, 20)).Data.Messages;
@@ -43,6 +48,7 @@ async function main() {
 
   async function getSummary(item) {
     if (index === item.ID) return;
+    if (!item.Fields.Content.includes("@生成摘要")) return;
 
     let summary;
     if (item.Fields.DiscussionID) {
@@ -51,7 +57,6 @@ async function main() {
       ).Data.Description.join("\n");
     }
     const response = await fetchChatCompletion(summary);
-    console.log(response);
     await user.messages.comment(
       item.Fields.DiscussionID,
       "Discussion",
@@ -63,12 +68,20 @@ async function main() {
   const promises = [];
   for (const item of messages) {
     if (index === item.ID) break;
+
     promises.push(getSummary(item));
+
+    if (promises.length === 2) {
+      await Promise.all(promises);
+      promises.length = 0;
+    }
   }
 
-  await Promise.all(promises);
+  if (promises.length > 0) {
+    await Promise.all(promises);
+  }
 
-  await fs.writeFile("./indx.txt", messages[0].ID);
+  await fs.writeFile("./index.txt", messages[0].ID);
 }
 
 main();
