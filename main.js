@@ -34,7 +34,7 @@ async function fetchChatCompletion(text) {
       "Error:",
       error.response ? error.response.data : error.message
     );
-    fs.appendFile("./error.txt", JSON.stringify(error));
+    fs.appendFile("./error.txt", JSON.stringify(error) + "\n");
     return (
       error.response
         ? JSON.stringify(error.response.data)
@@ -79,7 +79,7 @@ async function main() {
       response.replace(/\n/g, " ")
     );
     pl_logs.push(
-      `<discusisoon=${item.Fields.DiscussionID.replaceAll('"','')}><discusisoon=${item.Fields.DiscussionID.replaceAll('"','')}>来自${item.UserNames[0]}</discusisoon></discusisoon>`
+      `<discussion=${item.Fields.DiscussionID}><discussion=${item.Fields.DiscussionID}>来自${item.UserNames[0]}</discussion></discussion>`
     );
   }
 
@@ -99,7 +99,7 @@ async function main() {
     await Promise.all(promises);
   }
 
-  await fs.writeFile("./logs.txt", logs.join("\n"));
+  await fs.appendFile("./logs.txt", logs.join("\n"));
 
   const log_projects = await user.projects.getSummary(
     "6726dd25d1225ef795064fa7",
