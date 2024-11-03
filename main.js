@@ -49,6 +49,7 @@ async function main() {
   const user = new pl.User(process.env.USERNAME, process.env.PASSWORD);
   await user.user.login();
   const messages = (await user.notification.get(3, 20)).Data.Messages;
+  console.log(messages);
   await fs.writeFile("./index.txt", messages[0].ID);
   const index = (await fs.readFile("./index.txt", "utf-8")).trim();
 
