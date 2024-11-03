@@ -35,12 +35,17 @@ async function fetchChatCompletion(text) {
       error.response ? error.response.data : error.message
     );
     fs.appendFile("./error.txt", JSON.stringify(error));
-    return (error.response ? JSON.stringify(error.response.data) : JSON.stringify(error.message)).slice(0,300)
+    return (
+      error.response
+        ? JSON.stringify(error.response.data)
+        : JSON.stringify(error.message)
+    ).slice(0, 300);
   }
 }
 
 async function main() {
-  await fs.appendFile("./log.txt", "\n" + new Date().toDateString());
+  let logs = [];
+  let pl_logs = [];
   const user = new pl.User(process.env.USERNAME, process.env.PASSWORD);
   await user.user.login();
   const messages = (await user.notification.get(3, 20)).Data.Messages;
@@ -52,7 +57,6 @@ async function main() {
     if (!item?.Fields?.Content?.includes("@生成摘要")) return;
     if (item?.Fields?.Content?.length > 8) return;
     if (item.Users[0] === "669a4fc86b03afd70fa57bc2") return;
-
 
     let summary;
     if (item.Fields.DiscussionID) {
@@ -66,6 +70,15 @@ async function main() {
       "Discussion",
       `回复@${item.UserNames[0]}: 文章摘要如下：\n${response}`,
       item.Users[0]
+    );
+    logs.push(
+      new Date().toLocaleString(),
+      item.Fields.DuscussionID,
+      item.UserNames[0],
+      response.replace(/\n/g, " ")
+    );
+    pl_logs.push(
+      `<discusisoon="${item.Fields.DiscussionID}">来自${item.UserNames[0]}</discusisoon>`
     );
   }
 
@@ -85,7 +98,14 @@ async function main() {
     await Promise.all(promises);
   }
 
-  
+  await fs.writeFile("./logs.txt", logs.join("\n"));
+
+  const log_projects = await user.projects.getSummary(
+    "6726dd25d1225ef795064fa7",
+    "Discussion"
+  );
+  log_projects.Data.Description.push(pl_logs.join("\n"));
+  user.experiment.update(log_projects.Data);
 }
 
 main();
