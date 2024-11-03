@@ -53,6 +53,7 @@ async function main() {
   const index = (await fs.readFile("./index.txt", "utf-8")).trim();
 
   async function getSummary(item) {
+    console.log(item.Users[0]);
     if (index === item.ID) return;
     if (!item?.Fields?.Content?.includes("@生成摘要")) return;
     if (item?.Fields?.Content?.length > 8) return;
