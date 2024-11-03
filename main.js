@@ -44,13 +44,13 @@ async function main() {
   const user = new pl.User(process.env.USERNAME, process.env.PASSWORD);
   await user.user.login();
   const messages = (await user.notification.get(3, 20)).Data.Messages;
-
+  await fs.writeFile("./index.txt", messages[0].ID);
   const index = (await fs.readFile("./index.txt", "utf-8")).trim();
 
   async function getSummary(item) {
     if (index === item.ID) return;
-    if (!item.Fields.Content.includes("@生成摘要")) return;
-    if (item.Fields.Content.length > 8) return;
+    if (!item?.Fields?.Content?.includes("@生成摘要")) return;
+    if (item?.Fields?.Content?.length > 8) return;
     if (item.Users[0] === "669a4fc86b03afd70fa57bc2") return;
 
 
@@ -85,7 +85,7 @@ async function main() {
     await Promise.all(promises);
   }
 
-  await fs.writeFile("./index.txt", messages[0].ID);
+  
 }
 
 main();
