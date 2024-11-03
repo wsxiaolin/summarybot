@@ -50,9 +50,8 @@ async function main() {
   await user.user.login();
   const messages = (await user.notification.get(3, 20)).Data.Messages;
   console.log(messages);
-  await fs.writeFile("./index.txt", messages[0].ID);
   const index = (await fs.readFile("./index.txt", "utf-8")).trim();
-
+  await fs.writeFile("./index.txt", messages[0].ID);
   async function getSummary(item) {
     console.log(item.Users[0]);
     if (index === item.ID) return;
