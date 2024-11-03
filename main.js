@@ -79,7 +79,7 @@ async function main() {
       response.replace(/\n/g, " ")
     );
     pl_logs.push(
-      `<discusisoon="${item.Fields.DiscussionID}">来自${item.UserNames[0]}</discusisoon>`
+      `<discusisoon="${item.Fields.DiscussionID}"><discusisoon="${item.Fields.DiscussionID}">来自${item.UserNames[0]}</discusisoon></discusisoon>`
     );
   }
 
