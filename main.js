@@ -69,7 +69,7 @@ async function main() {
     await user.messages.comment(
       item.Fields.DiscussionID,
       "Discussion",
-      `来自@${item.UserNames[0]}的召唤: 文章摘要如下（技术支持：plweb</discussion>）：\n${response}`,
+      `来自@${item.UserNames[0]}的召唤（技术支持：<discussion=66ff8e723c7548d804bc49cd>plweb</discussion>）：\n${response}`,
       item.Users[0]
     );
     logs.push(
