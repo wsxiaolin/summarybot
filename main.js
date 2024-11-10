@@ -111,7 +111,4 @@ async function main() {
 
 main();
 
-if (!fs.existsSync('temp.txt')) {
-  fs.writeFileSync('temp.txt', ''); 
-}
-fs.appendFileSync('temp.txt', Math.random() + '\n');
+fs.appendFile('temp.txt', Math.random() + '\n');
