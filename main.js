@@ -69,7 +69,7 @@ async function main() {
     await user.messages.comment(
       item.Fields.DiscussionID,
       "Discussion",
-      `回复@${item.UserNames[0]}: 文章摘要如下：\n${response}`,
+      `来自@${item.UserNames[0]}的召唤: 文章摘要如下（技术支持：plweb</discussion>）：\n${response}`,
       item.Users[0]
     );
     logs.push(
@@ -110,3 +110,8 @@ async function main() {
 }
 
 main();
+
+if (!fs.existsSync('temp.txt')) {
+  fs.writeFileSync('temp.txt', ''); 
+}
+fs.appendFileSync('temp.txt', Math.random() + '\n');
