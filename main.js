@@ -72,8 +72,8 @@ async function main() {
     }
     const response = await fetchChatCompletion(summary);
     await user.messages.comment(
-      item.Fields.DiscussionID,
-      "Discussion",
+      item.Fields.DiscussionID || item.Fields.ExperimentID,
+      item.Fields.DiscussionID ? "Discussion" : "Experiment",
       `来自@${item.UserNames[0]} 的召唤（技术支持：<discussion=66ff8e723c7548d804bc49cd>plweb</discussion>）：\n${response}`,
       item.Users[0]
     );
