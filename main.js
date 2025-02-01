@@ -65,11 +65,16 @@ async function main() {
         await user.projects.getSummary(item.Fields.DiscussionID, "Discussion")
       ).Data.Description.join("\n");
     }
+    if (item.Fields.ExperimentID) {
+      summary = (
+        await user.projects.getSummary(item.Fields.ExperimentID, "Experiment")
+      ).Data.Description.join("\n");
+    }
     const response = await fetchChatCompletion(summary);
     await user.messages.comment(
       item.Fields.DiscussionID,
       "Discussion",
-      `来自@${item.UserNames[0]}的召唤（技术支持：<discussion=66ff8e723c7548d804bc49cd>plweb</discussion>）：\n${response}`,
+      `来自@${item.UserNames[0]} 的召唤（技术支持：<discussion=66ff8e723c7548d804bc49cd>plweb</discussion>）：\n${response}`,
       item.Users[0]
     );
     logs.push(
