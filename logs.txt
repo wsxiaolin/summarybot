@@ -1523,4 +1523,7 @@ Betelgeuse参宿四
 上周，摘要生成bot处理了上百次请求，调用331087个token，受到广泛欢迎。用户可在作品评论区@该账号获取摘要。技术支持方面，采用Nodejs实现，源码可私聊获取。针对多次回复问题，已得到解决。由于通过读取消息区判断生成摘要，因此@后删除仍会生效。下午将进行一次小更新，敬请期待。7/13/2025, 7:38:45 AM
 
 还没想好呢称
-{"error":{"message":"AppIdNoAuthError (sid: cha000bacb4@dx19802b8d81ab8f2532)","type":"api_error","param":null,"code":"11200"}}
+{"error":{"message":"AppIdNoAuthError (sid: cha000bacb4@dx19802b8d81ab8f2532)","type":"api_error","param":null,"code":"11200"}}7/13/2025, 12:24:20 PM
+
+还没想好呢称
+{"error":{"message":"AppIdNoAuthError (sid: cha000bb527@dx19803be4a989a4b532)","type":"api_error","param":null,"code":"11200"}}
