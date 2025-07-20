@@ -1539,4 +1539,7 @@ Betelgeuse参宿四
 {"error":{"message":"AppIdNoAuthError (sid: cha000b2615@dx198256d1be4b8f3532)","type":"api_error","param":null,"code":"11200"}}7/20/2025, 10:15:09 AM
 
 C成飞六代机歼36A
-{"error":{"message":"AppIdNoAuthError (sid: cha000bb6bc@dx198275488749a4b532)","type":"api_error","param":null,"code":"11200"}}
+{"error":{"message":"AppIdNoAuthError (sid: cha000bb6bc@dx198275488749a4b532)","type":"api_error","param":null,"code":"11200"}}7/20/2025, 12:28:39 PM
+
+C成飞六代机歼36A
+{"error":{"message":"AppIdNoAuthError (sid: cha000b1190@dx19827cec335b8f3532)","type":"api_error","param":null,"code":"11200"}}
